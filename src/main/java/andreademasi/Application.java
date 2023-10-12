@@ -4,7 +4,11 @@ import andreademasi.shop.Customer;
 import andreademasi.shop.Order;
 import andreademasi.shop.Product;
 import com.github.javafaker.Faker;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Supplier;
@@ -70,9 +74,26 @@ public class Application {
         List<Product> dalPiuCostoso = products.stream().sorted(Comparator.comparing(product -> product.getPrice(), Comparator.reverseOrder())).limit(3).toList();
         dalPiuCostoso.forEach(System.out::println);
 
-        // ESERCZIO 4
+        // ESERCIZIO 4
         System.out.println("*********************** ESERCIZIO 4 ***********************");
         Double mediaOrdini = orders.stream().collect(Collectors.summingDouble(sum -> sum.getProducts().stream().mapToDouble(Product::getPrice).average().orElse(0.0)));
         System.out.println("La media degli ordini e': " + mediaOrdini);
+
+        //ESERCIZIO 6
+        try {
+            System.out.println(exercise6(products));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static boolean exercise6(List<Product> products) throws IOException {
+        File file = new File("src/output.txt");
+        for (int i = 0; i < products.size(); i++) {
+            FileUtils.writeStringToFile(file, products.get(i).getName() + "@" + products.get(i).getCategory() + "@" + products.get(i).getPrice() + "#", StandardCharsets.UTF_8, true);
+        }
+        String content = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+        System.out.println("Nel file e' presente: " + content);
+        return false;
     }
 }
