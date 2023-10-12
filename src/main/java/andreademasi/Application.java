@@ -62,9 +62,11 @@ public class Application {
 
         // ESERCIZIO 2
         System.out.println("*********************** ESERCIZIO 2 ***********************");
-        double tot = products.stream().mapToDouble(Product::getPrice).sum();
-        System.out.println(tot);
-        //Map<Customer, Product> totaleVendite = orders.stream().collect(Collectors.groupingBy(Customer::getName));
+        Map<Customer, Double> totaleVendite = orders.stream().collect(Collectors.groupingBy(Order::getCustomer, Collectors.summingDouble(order -> order.getProducts().stream().mapToDouble(Product::getPrice).sum())));
+        totaleVendite.forEach((customer, total) -> System.out.println("Cliente: " + customer.getName() + " -> totale speso: " + total));
+
+        // ESERCIZIO 3
+        
 
         // ESERCZIO 4
         double media = products.stream().mapToDouble(Product::getPrice).average().orElse(0.0);
