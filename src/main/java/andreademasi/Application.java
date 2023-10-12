@@ -73,6 +73,6 @@ public class Application {
         // ESERCZIO 4
         System.out.println("*********************** ESERCIZIO 4 ***********************");
         Double mediaOrdini = orders.stream().collect(Collectors.summingDouble(sum -> sum.getProducts().stream().mapToDouble(Product::getPrice).average().orElse(0.0)));
-        System.out.println(mediaOrdini);
+        System.out.println("La media degli ordini e': " + mediaOrdini);
     }
 }
