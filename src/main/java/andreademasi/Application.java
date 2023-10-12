@@ -62,7 +62,13 @@ public class Application {
 
         // ESERCIZIO 2
         System.out.println("*********************** ESERCIZIO 2 ***********************");
-        Map<Customer, DoubleSummaryStatistics> totaleVendite = orders.stream().collect(Collectors.groupingBy(Customer::getName, Collectors.summarizingDouble(Product::getPrice)));
+        double tot = products.stream().mapToDouble(Product::getPrice).sum();
+        System.out.println(tot);
+        //Map<Customer, Product> totaleVendite = orders.stream().collect(Collectors.groupingBy(Customer::getName));
+
+        // ESERCZIO 4
+        double media = products.stream().mapToDouble(Product::getPrice).average().orElse(0.0);
+        System.out.println(media);
 
     }
 }
