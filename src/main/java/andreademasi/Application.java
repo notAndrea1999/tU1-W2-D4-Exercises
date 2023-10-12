@@ -36,7 +36,7 @@ public class Application {
         };
 
         List<Product> products = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 10; i++) {
             products.add(productSupplier.get());
         }
 
@@ -66,9 +66,12 @@ public class Application {
         totaleVendite.forEach((customer, total) -> System.out.println("Cliente: " + customer.getName() + " -> totale speso: " + total));
 
         // ESERCIZIO 3
-        
+        System.out.println("*********************** ESERCIZIO 3 ***********************");
+        List<Product> dalPiuCostoso = products.stream().sorted(Comparator.comparing(product -> product.getPrice(), Comparator.reverseOrder())).limit(3).toList();
+        dalPiuCostoso.forEach(System.out::println);
 
         // ESERCZIO 4
+        System.out.println("*********************** ESERCIZIO 4 ***********************");
         double media = products.stream().mapToDouble(Product::getPrice).average().orElse(0.0);
         System.out.println(media);
 
