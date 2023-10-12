@@ -72,8 +72,7 @@ public class Application {
 
         // ESERCZIO 4
         System.out.println("*********************** ESERCIZIO 4 ***********************");
-        double media = products.stream().mapToDouble(Product::getPrice).average().orElse(0.0);
-        System.out.println(media);
-
+        Double mediaOrdini = orders.stream().collect(Collectors.summingDouble(sum -> sum.getProducts().stream().mapToDouble(Product::getPrice).average().orElse(0.0)));
+        System.out.println(mediaOrdini);
     }
 }
